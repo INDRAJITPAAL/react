@@ -1,57 +1,30 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { use } from "react";
-function App() {
+import React, { useEffect, useMemo, useState, Component } from "react";
 
 
-  const [visibility, setVisiblity] = useState(true);
+//class based component vs function based component
 
-  useEffect(() => {
-    let clock = setInterval(() => {
-      setVisiblity((prev) => !prev);
-    }, 5000);
-    return function () {
-      console.log("unMount in visility")
-      clearInterval(clock);
-    }
 
-  }, [])
+class App extends Component {
 
-  return (
-    <>
-      <h1>hii there start</h1>
-      {visibility && <Counter />}
-      <h1>hii there last</h1>
-    </>
-  )
+  state = { count: 0 }
+
+  increment = ()=> {
+    this.setState({ count: this.state.count + 1 });
+  }
+
+  render() {
+    return (<div>
+      <h1>{this.state.count}</h1>
+      <button onClick={this.increment} >increase count</button>
+    </div>)
+  }
+
+
+
+
+
+
 }
-
-
-
-function Counter() {
-  const [count, setCount] = useState(0);
-  console.log("count");
-  useEffect(() => {
-    let clock = setInterval(() => {
-      console.log("counter interval");
-      setCount(prev => prev + 1);
-    }, 1000)
-
-    return function () {
-      console.log("unMount in counter")
-      clearInterval(clock);
-    }
-
-  }, []);
-
-  return (
-    <>
-
-      <h1> count is :  {count}</h1>
-
-    </>
-  )
-}
-
 
 
 export default App
