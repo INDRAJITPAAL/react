@@ -1,30 +1,40 @@
-import React, { useEffect, useMemo, useState, Component } from "react";
+import ErrorBaundary from "./ErrorBaundary"
+
+export default function App() {
+    try {
+        throw new Error("hello");
+    } catch (e) {
+        console.error(e.message);
+
+    }
+    return <>
+
+        <ErrorBaundary>
+
+            <Card1 />
+
+            <Card2 />
+
+        </ErrorBaundary>
 
 
-//class based component vs function based component
-
-
-class App extends Component {
-
-  state = { count: 0 }
-
-  increment = ()=> {
-    this.setState({ count: this.state.count + 1 });
-  }
-
-  render() {
-    return (<div>
-      <h1>{this.state.count}</h1>
-      <button onClick={this.increment} >increase count</button>
-    </div>)
-  }
-
-
-
-
-
-
+    </>//=>this is claeed Fragment
 }
 
+function Card1() {
 
-export default App
+    throw new Error("err")
+    return <>
+        <div>
+            hi there 1
+        </div>
+    </>
+}
+function Card2() {
+
+    return <>
+        <div>
+            hi there 2
+        </div>
+    </>
+}
