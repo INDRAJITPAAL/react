@@ -1,40 +1,39 @@
 import ErrorBaundary from "./ErrorBaundary"
 
+import { BrowserRouter, Routes, Route, Link, Outlet } from "react-router-dom"
+
 export default function App() {
-    try {
-        throw new Error("hello");
-    } catch (e) {
-        console.error(e.message);
 
-    }
     return <>
+        <BrowserRouter>
 
-        <ErrorBaundary>
+            <Routes>
 
-            <Card1 />
+                <Route path="/" element={<Layout />} >
+                    <Route path="/home" element={"landing page"} />
+                    <Route path="/contact" element={"contact  page"} />
+                    <Route path="/about" element={"about  page"} />
+                    <Route path="*" element={"page not found"} />
+                </Route>
+            </Routes>
 
-            <Card2 />
+        </BrowserRouter>
+    </>
 
-        </ErrorBaundary>
-
-
-    </>//=>this is claeed Fragment
 }
 
-function Card1() {
 
-    throw new Error("err")
-    return <>
-        <div>
-            hi there 1
-        </div>
-    </>
-}
-function Card2() {
+function Layout() {
 
-    return <>
-        <div>
-            hi there 2
-        </div>
-    </>
+
+    return (<>
+        <h1> <Link to="/contact">contact</Link> &nbsp;
+            <Link to="/home">home</Link> &nbsp;
+            <Link to="/about">about</Link> &nbsp;</h1>
+        <br />
+        <Outlet />
+        <h1>footer</h1>
+
+    </>)
+
 }
